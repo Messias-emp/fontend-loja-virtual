@@ -1,0 +1,36 @@
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { HomeBanner } from '../home-banner/home-banner';
+import { Product } from '../../models/product.model';
+import { CartService } from './../../../core/services/cart.service';
+
+@Component({
+  selector: 'app-home',
+  imports: [CommonModule, HomeBanner],
+  
+templateUrl: './home.html',
+  styleUrl: './home.scss',
+})
+export class Home implements OnInit {
+  products: Product[] = [];
+
+ constructor(private route: ActivatedRoute, private cartService: CartService  ) { }
+
+  addToCart(product: Product) {
+
+    if (!product.id) return;  // só bloqueia se NÃO tiver id
+
+    this.cartService.addItem({
+      productId: product.id!,
+      name: product.name,
+      price: product.price,
+      quantity: 1
+    });
+     console.log('Produto adicionado 🛒', product); // simples (depois melhoramos)
+  }
+  ngOnInit(): void {
+    this.products = this.route.snapshot.data['products'];
+  }
+
+}

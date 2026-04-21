@@ -1,0 +1,41 @@
+<section class="orders-container">
+  <h2>Meus Pedidos</h2>
+ 
+
+  <!-- Loading -->
+  <p *ngIf="loading">Carregando pedidos...</p>
+
+  <!-- Lista -->
+  <div *ngIf="!loading">
+
+    <!-- Sem pedidos -->
+    <div *ngIf="orders.length === 0" class="empty-state">
+      <p>Você ainda não fez nenhum pedido.</p>
+    </div>
+
+    <!-- Com pedidos -->
+    <div *ngIf="orders.length > 0" class="orders-grid">
+
+      <div class="order-card" *ngFor="let order of orders">
+
+        <div class="order-header">
+          <span class="order-id">Pedido #{{ order.id }}</span>
+         <!-- #region  <app-order-status-badge [status]="order.status"></app-order-status-badge>-->
+          <span>Status: {{ order.status }}</span>
+        </div>
+
+        <div class="order-info">
+          <p>Data: {{ order.createdAt | date:'dd/MM/yyyy' }}</p>
+          <p>Total: {{ order.total | currency:'BRL' }}</p>
+        </div>
+
+        <a [routerLink]="['/meus-pedidos', order.id]">
+          Ver detalhes
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

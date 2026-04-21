@@ -1,0 +1,22 @@
+
+<table>
+  <tr *ngFor="let item of (cartService.items$ | async)">
+    <td>{{ item.name }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>{{ item.price | currency:'BRL' }}</td>
+  </tr>
+</table>
+
+<p>
+  <strong>Total2:</strong>
+  {{ getTotal() | currency:'BRL' }}
+</p>
+
+<h1>Finalizar Pedido</h1>
+
+<button (click)="checkout()" [disabled]="loading">
+  Finalizar pedido
+</button>
+<p *ngIf="errorMessage" style="color:red">
+  {{ errorMessage }}
+</p>

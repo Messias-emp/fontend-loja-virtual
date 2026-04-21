@@ -1,0 +1,13 @@
+.admin-container {
+  height: 100vh;
+}
+
+mat-sidenav {
+  width: 240px;
+  gap: 16px;
+}
+
+mat-sidenav-content {
+  padding: 24px;
+  background: #f3f4f6; /* cinza leve */
+}

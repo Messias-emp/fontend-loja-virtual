@@ -1,0 +1,24 @@
+<table>
+  <tr *ngFor="let item of items$ | async">
+    <td>{{ item.name }}</td>
+    <td>{{ item.quantity }}</td>
+    <td>{{ item.price | currency:'BRL' }}</td>
+    <td>
+      <button (click)="remove(item.productId)">
+        Remover
+      </button>
+    </td>
+  </tr>
+</table>
+
+<p>
+  <strong>Total:</strong>
+  {{ getTotal() | currency:'BRL' }}
+</p>
+
+<button
+  routerLink="/checkout"
+  [disabled]="(items$ | async)?.length === 0"
+>
+  Ir para Checkout
+</button>

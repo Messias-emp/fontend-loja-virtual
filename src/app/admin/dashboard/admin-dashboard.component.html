@@ -1,0 +1,99 @@
+<!-- 🔹 HEADER DO DASHBOARD -->
+<div class="flex justify-between items-center mb-8">
+
+  <!-- Título -->
+  <h1 class="text-2xl font-bold">
+    Admin Dashboard
+  </h1>
+
+  <!-- Nome do usuário -->
+  <div class="text-gray-500">
+    Bem-vindo, {{ userName }}
+  </div>
+
+</div>
+
+
+<!-- 🔄 LOADING (boa prática de UX) -->
+<div *ngIf="loading" class="text-gray-500">
+  Carregando dados...
+</div>
+
+
+<!-- 📊 CONTEÚDO PRINCIPAL -->
+<div *ngIf="!loading">
+
+  <!-- ========================= -->
+  <!-- 📦 MÉTRICAS DE PRODUTOS -->
+  <!-- ========================= -->
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- TOTAL -->
+    <mat-card>
+      <p>Total Produtos</p>
+      <h2>{{ totalProducts }}</h2>
+    </mat-card>
+
+    <!-- ATIVOS -->
+    <mat-card>
+      <p>Ativos</p>
+      <h2>{{ activeProducts }}</h2>
+    </mat-card>
+
+    <!-- INATIVOS -->
+    <mat-card>
+      <p>Inativos</p>
+      <h2>{{ inactiveProducts }}</h2>
+    </mat-card>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- 🧾 MÉTRICAS DE PEDIDOS -->
+  <!-- ========================= -->
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+
+    <!-- TOTAL PEDIDOS -->
+    <mat-card>
+      <p>Total Pedidos</p>
+      <h2>{{ totalOrders }}</h2>
+    </mat-card>
+
+    <!-- FATURAMENTO -->
+    <mat-card>
+      <p>Faturamento</p>
+      <h2>R$ {{ totalRevenue }}</h2>
+    </mat-card>
+
+    <!-- TICKET MÉDIO -->
+    <mat-card>
+      <p>Ticket Médio</p>
+      <h2>R$ {{ averageTicket }}</h2>
+    </mat-card>
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- 📊 GRÁFICO -->
+  <!-- ========================= -->
+
+  <mat-card class="mt-8 p-4">
+
+    <h3 class="text-lg font-semibold mb-4">
+      Produtos Ativos vs Inativos
+    </h3>
+
+    <!-- 🔥 Aqui o gráfico é renderizado -->
+    <canvas
+      baseChart
+      [data]="pieChartData"
+      [type]="pieChartType">
+    </canvas>
+
+  </mat-card>
+
+</div>

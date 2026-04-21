@@ -1,0 +1,82 @@
+<!-- loading -->
+<div *ngIf="loading">
+  <p>Carregando pedido...</p>
+</div>
+
+<!-- página do pedido -->
+<div *ngIf="!loading && order" class="order-page">
+
+  <!-- CABEÇALHO DO PEDIDO -->
+  <div class="order-header">
+
+    <div>
+      <strong>Pedido:</strong>
+      #{{order.id}}
+    </div>
+
+    <div>
+      <strong>Data:</strong>
+      {{order.createdAt | date:'dd/MM/yyyy'}}
+    </div>
+
+    <div>
+      <strong>Status:</strong>
+      <span class="status">
+        {{order.status}}
+      </span>
+    </div>
+
+  </div>
+
+
+  <!-- LISTA DE ITENS -->
+  <div class="order-items">
+
+    <h3>Itens do Pedido</h3>
+
+    <div
+      class="item-card"
+      *ngFor="let item of order.items"
+    >
+
+      <div class="item-info">
+
+        <h4>{{item.productName}}</h4>
+
+        <p>
+          Quantidade: {{item.quantity}}
+        </p>
+
+        <p>
+          Preço unitário:
+          {{item.price | currency:'BRL'}}
+        </p>
+
+      </div>
+
+      <div class="item-total">
+
+        {{item.price * item.quantity | currency:'BRL'}}
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- RESUMO DO PEDIDO -->
+  <div class="order-summary">
+
+    <h3>Resumo do Pedido</h3>
+
+    <p>
+      Total:
+      <strong>
+        {{order.total | currency:'BRL'}}
+      </strong>
+    </p>
+
+  </div>
+
+</div>
